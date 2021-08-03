@@ -41,7 +41,7 @@ class Point extends Feature {
          * if coloredByHeight equals true,points will render color conditional on height.
          * red represents high value.
          */
-        this.coloredByHeight = defaultValue(options.coloredByHeight, true)
+        this.coloredByHeight = defaultValue(options.coloredByHeight, false)
 
         return this.init();
     }
