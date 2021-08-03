@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>terra</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+    <script src="./thirdparty/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="terra-container"></div>
+</body>
+<script type="module">
+    import Terra from './src/index.js'
+
+    let earth = new Terra.Earth({
+        cloud: false,
+        galaxy: true,
+        rotation: true,
+        // showAxes:true,
+    });
+
+    let data = [];
+    axios.get('./assets/json/population.json').then(res => {
+        let data = res.data;
+
+        let points = new Terra.Point({
+            dataset: data,
+            ingoreAlt: true,
+            size: 0.8,
+            coloredByHeight: true,
+        });
+
+        earth.addFeature(points)
+    })
+</script>
+
+</html>

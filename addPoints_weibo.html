@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>terra</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+    </style>
+    <script src="./thirdparty/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="terra-container"></div>
+</body>
+<script type="module">
+    import Terra from './src/index.js'
+
+    let earth = new Terra.Earth({
+        cloud: false,
+        galaxy: true,
+        rotation: true,
+        // showAxes:true
+    });
+
+    let data = [];
+    axios.get('./assets/json/china-point.json').then(res => {
+        let rs = res.data;
+        for (let i = 0; i < rs[0].length; i++) {
+            let geoCoord = rs[0][i].geoCoord;
+            data.push(geoCoord);
+        }
+
+        let points = new Terra.Point({
+            dataset: data,
+            size: 0.1,
+            shape: 'circle'
+        });
+
+        earth.addFeature(points)
+    })
+</script>
+
+</html>
